@@ -26,6 +26,12 @@ new Vue({
     methods:{
         capturaTecla(event){
             chave = event.key;
+
+            if (this.pergunta == ""){
+                this.resposta = '';
+                this.frase = Math.floor(Math.random() * ( this.frases.length ));
+            }
+
             if(this.pressionarTeclaMagica(chave)){
                 this.ativado = !this.ativado
                 this.enviarLetraFrases();
@@ -45,11 +51,8 @@ new Vue({
         },
         enviarLetraFrases(){
             if(chave.length==1){
-                if (this.pergunta == ""){
-                    this.frase = Math.floor(Math.random() * ( this.frases.length ))
-                }
-            this.pergunta += this.frases[this.frase].substr(this.pergunta.length,1)
-            event.preventDefault();
+                this.pergunta += this.frases[this.frase].substr(this.pergunta.length,1)
+                event.preventDefault();
             }
 
         },
