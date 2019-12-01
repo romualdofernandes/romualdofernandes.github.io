@@ -6,9 +6,21 @@ new Vue({
         pergunta: '',
         ativado: false,
         oculta : '',
+        resposta: '',
         teclaMagica: ';',
+        frase : 0,
         frases : [
             'Meu grande mister, me responda',
+            'Mister meu grande amigo,',
+            'Mister, me responda por favor',
+        ],
+        respostas : [
+            'Não irei responder',
+            'Não gostei dessa pergunta',
+            'Faça outra pergunta',
+            'Não digo',
+            'Minha sabedoria está longe do seu alcance!',
+            'Você não está preparado para saber a verdade!'
         ],
     },
     methods:{
@@ -25,7 +37,7 @@ new Vue({
                 this.guardaPalavraOculta(chave);
             }                           
         },
-        pressionarTeclaMagica(chave){
+        pressionarTeclaMagica(chave){   
             if (chave == this.teclaMagica  && chave.length==1){
                 return true;
             }
@@ -33,7 +45,10 @@ new Vue({
         },
         enviarLetraFrases(){
             if(chave.length==1){
-            this.pergunta += this.frases[0].substr(this.pergunta.length,1)
+                if (this.pergunta == ""){
+                    this.frase = Math.floor(Math.random() * ( this.frases.length ))
+                }
+            this.pergunta += this.frases[this.frase].substr(this.pergunta.length,1)
             event.preventDefault();
             }
 
@@ -46,6 +61,18 @@ new Vue({
                 this.oculta += chave;
             }
             
+        },
+        exibeResposta(){
+            if (this.oculta==""){
+                this.resposta = this.respostas[Math.floor(Math.random() * ( this.respostas.length ))];
+            }
+            else{
+                this.resposta = this.oculta;
+            }
+
+            this.oculta = '';
+            this.pergunta = '';
+
         }
     }
 

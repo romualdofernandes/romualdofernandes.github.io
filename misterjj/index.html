@@ -20,14 +20,14 @@
   
   <div class="container" id="app">
     <div class="form-group">
-      <input type="text" class="form-control" v-model="pergunta" v-on:keydown="capturaTecla" ref="search" placeholder="" />
+      <input type="text" class="form-control" v-model="pergunta" v-on:keyup.enter="exibeResposta" v-on:keydown="capturaTecla" ref="search" placeholder="" />
     </div>
     <div class="form-group">
-      <button type="button" class="btn btn-primary btn-block" @click="setFocus()">Perguntar</button>
+      <button type="button" class="btn btn-primary btn-block" @click="exibeResposta">Perguntar</button>
     </div>
 
     <div class="form-group">
-        <input type="text" class="form-control-sem-borda" v-model="oculta" disabled ref="search" placeholder="" />
+        <input type="text" class="form-control-sem-borda" v-model="resposta" disabled ref="search" placeholder="" />
       </div>
   </div>
   <script type="text/javascript" src="app.js" charset="UTF-8"></script>
